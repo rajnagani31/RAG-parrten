@@ -1,0 +1,67 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Python build artifacts
+build/
+dist/
+wheels/
+*.egg-info/
+*.egg
+MANIFEST
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# uv / Python tooling
+.ruff_cache/
+.mypy_cache/
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+
+# Environment variables and local secrets
+.env
+.env.*
+!.env.example
+.env
+*.env
+# Logs and runtime output
+*.log
+logs/
+tmp/
+temp/
+
+# RAG / vector database local data
+qdrant_storage/
+neo4j_data/
+storage/
+data/
+uploads/
+*.sqlite
+*.sqlite3
+*.db
+
+# Generated query / retrieval output
+re_ranking_parrten/query/answer*.py
+*.jsonl
+*.ndjson
+
+# Jupyter notebooks
+.ipynb_checkpoints/
+
+# IDE / editor files
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
