@@ -19,7 +19,7 @@ client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 
 class QdrantVectorService:
-
+    
     def __init__(self):
         self.collection_name = os.getenv("QDRANT_COLLECTION_NAME", "re_ranking_pattern")
         self.qdrant_url = os.getenv("QDRANT_URL", "http://localhost:6333")
@@ -98,7 +98,7 @@ class QdrantVectorService:
     # =========================
     # SEARCH
     # =========================
-    def search(self, user_id: int, query: str, k=5):
+    def search(self, user_id: int, query: str, k=10):
         query_vector = self.create_embedding(query)
 
         response = self.client.query_points(
@@ -114,7 +114,19 @@ class QdrantVectorService:
             ),
         )
 
-        return [r.payload.get("text", "") for r in response.points if r.payload]
+        # chunk for each query results
+
+        result = []
+
+        for rank,point in enumerate(response.points, start=1):
+            result.append({
+                "chunk": point.payload.get("text", ""), # type: ignore
+                "score": point.score,
+                "rank": rank,
+                "query": query
+            })
+
+        return result
 
 
 # store pdf vector for test re-ranking pattern
